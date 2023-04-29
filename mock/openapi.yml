@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Animal API
+  description: This is Sample API.
+  termsOfService: http://animal-api/
+  contact:
+    name: API support
+    url: http://XXXXX/support
+    email: support@XXXX.com
+  version: 1.0.0
+servers:
+  - url: "http://localhost:4010"
+    description: Development server
+paths:
+  /animal/register:
+    post:
+      tags: 
+        - animal
+      summary: Create a new Animal
+      description: Create a new Animal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                    example: "ok"
+  /animal/dog:
+    get:
+      tags:
+        - animal
+      summary: Get Dog.
+      description: Get Dog.
+      responses:
+        '200':
+          description: A single Animal model
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                    example: "ok"
+                  explanation:
+                    type: "string"
+                    example: "Dog is very cool"
+  /animal/cat:
+    get:
+      tags:
+        - animal
+      summary: Get Cat.
+      description: Get Cat.
+      responses:
+        '200':
+          description: A single Animal model
+          content:
+            application/json:
+              schema:
+                type: "object"
+                properties:
+                  message:
+                    type: "string"
+                    example: "ok"
+                  explanation:
+                    type: "string"
+                    example: "Cat is very cute"

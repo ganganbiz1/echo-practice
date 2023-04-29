@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      target: dev
+      dockerfile: Dockerfile
+    env_file: .env
+    tty: true
+    container_name: echo-practice
+    volumes:
+      - ./:/go/src/app
+    ports:
+      - 1323:1323
+      - 2345:2345
+  mock:
+    image: node:19-alpine3.16
+    tty: true
+    container_name: animal-api
+    working_dir: /tmp
+    #restart: always
+    command: >
+      sh -c '
+        npm install -g @stoplight/prism-cli
+        prism mock -h 0.0.0.0 "/tmp/openapi.yml"
+      '
+    volumes:
+      - data-mock:/var/lib/mock/data
+      - ./mock:/tmp
+    ports:
+      - 4010:4010
+volumes:
+  data-mock:
